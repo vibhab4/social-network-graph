@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Search Users{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>🔍 Search Users</h1>
+</div>
+
+<div class="search-box">
+    <form action="/search" method="GET">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Enter user ID (e.g. 0, 107, 1684...)" 
+            value="{{ query or '' }}"
+        />
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{% if results %}
+<div class="results">
+    <h2>Results</h2>
+    {% for user in results %}
+    <div class="user-card">
+        <span class="user-id">User {{ user.id }}</span>
+        <span class="friend-count">{{ user.friend_count }} friends</span>
+        <a href="/profile/{{ user.id }}" class="btn">View Profile</a>
+    </div>
+    {% endfor %}
+</div>
+{% elif query %}
+<p class="no-results">No users found for "{{ query }}"</p>
+{% endif %}
+{% endblock %}

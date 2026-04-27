@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.env
+*.env
+db/neo4j_connection.py

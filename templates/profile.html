@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}User {{ user_id }} Profile{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>👤 User {{ user_id }}</h1>
+    <a href="/" class="btn-back">← Back to Search</a>
+</div>
+
+<div class="profile-grid">
+    <div class="profile-card">
+        <h2>Profile Info</h2>
+        <p><strong>User ID:</strong> {{ user_id }}</p>
+        <p><strong>Total Friends:</strong> {{ friends|length }}</p>
+        <p><strong>Circles:</strong> {{ circles|length }}</p>
+    </div>
+
+    <div class="profile-card">
+        <h2>Friends ({{ friends|length }})</h2>
+        <div class="friends-list">
+            {% for friend in friends[:20] %}
+            <a href="/profile/{{ friend.id }}" class="friend-chip">
+                User {{ friend.id }}
+            </a>
+            {% endfor %}
+            {% if friends|length > 20 %}
+            <span class="more">+{{ friends|length - 20 }} more</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="profile-card full-width">
+        <h2>💡 Friend Recommendations</h2>
+        <div class="friends-list">
+            {% for rec in recommendations %}
+            <a href="/profile/{{ rec.id }}" class="friend-chip recommended">
+                User {{ rec.id }}
+                <small>({{ rec.mutual }} mutual)</small>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

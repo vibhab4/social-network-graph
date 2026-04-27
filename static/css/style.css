@@ -1,0 +1,295 @@
+/* ── Base ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f1a;
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: #1a1a2e;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #4a90e2;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #4a90e2;
+}
+
+/* ── Container ── */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* ── Page Header ── */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: #888;
+}
+
+/* ── Search Box ── */
+.search-box {
+    background: #1a1a2e;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #2a2a4a;
+}
+
+.search-box form {
+    display: flex;
+    gap: 1rem;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #2a2a4a;
+    background: #0f0f1a;
+    color: #e0e0e0;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #4a90e2;
+}
+
+.search-box button {
+    padding: 0.75rem 1.5rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.search-box button:hover {
+    background: #357abd;
+}
+
+/* ── User Cards ── */
+.results h2 {
+    margin-bottom: 1rem;
+    color: #4a90e2;
+}
+
+.user-card {
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+}
+
+.user-card:hover {
+    border-color: #4a90e2;
+}
+
+.user-id {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #4a90e2;
+}
+
+.friend-count, .mutual-count {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.rec-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* ── Buttons ── */
+.btn {
+    background: #4a90e2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #357abd;
+}
+
+.btn-back {
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn-back:hover {
+    text-decoration: underline;
+}
+
+/* ── Profile ── */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.profile-card {
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.profile-card h2 {
+    color: #4a90e2;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.profile-card p {
+    margin-bottom: 0.5rem;
+    color: #ccc;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ── Friends List ── */
+.friends-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.friend-chip {
+    background: #0f0f1a;
+    border: 1px solid #2a2a4a;
+    color: #e0e0e0;
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friend-chip:hover {
+    border-color: #4a90e2;
+    color: #4a90e2;
+}
+
+.friend-chip.recommended {
+    border-color: #2ecc71;
+    color: #2ecc71;
+}
+
+.friend-chip small {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.more {
+    color: #888;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+}
+
+/* ── Circles ── */
+.circles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.circle-card {
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.circle-card:hover {
+    border-color: #4a90e2;
+}
+
+.circle-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.circle-card h3 {
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.circle-stat {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.circle-card .btn {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* ── No Results ── */
+.no-results {
+    color: #888;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+}

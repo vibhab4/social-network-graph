@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Recommendation Feed{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>💡 Friend Recommendations</h1>
+    <p>Users you might know based on mutual connections</p>
+</div>
+
+<div class="search-box">
+    <form action="/feed" method="GET">
+        <input 
+            type="text" 
+            name="user_id" 
+            placeholder="Enter your User ID to get recommendations..." 
+            value="{{ user_id or '' }}"
+        />
+        <button type="submit">Get Recommendations</button>
+    </form>
+</div>
+
+{% if recommendations %}
+<div class="results">
+    <h2>Recommended for User {{ user_id }}</h2>
+    {% for rec in recommendations %}
+    <div class="user-card">
+        <div class="rec-info">
+            <span class="user-id">User {{ rec.id }}</span>
+            <span class="mutual-count">🤝 {{ rec.mutual }} mutual friends</span>
+        </div>
+        <a href="/profile/{{ rec.id }}" class="btn">View Profile</a>
+    </div>
+    {% endfor %}
+</div>
+{% elif user_id %}
+<p class="no-results">No recommendations found for User {{ user_id }}</p>
+{% endif %}
+{% endblock %}
