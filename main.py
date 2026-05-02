@@ -14,40 +14,42 @@ def divider(title=""):
     print("\n--- " + title + " ---" if title else "\n" + "-" * 40)
 
 def pause():
+    input("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
     input("\nPress Enter to continue")
+    input("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
 
 
 def main_menu():
     print("\n      (: Connected :) - Network")
-    print("############################")
-    print("1. Register")
-    print("2. Login")
-    print("0. Exit")
-    print("############################")
+    print("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
+    print("- 1. Register")
+    print("- 2. Login")
+    print("- 0. Exit")
+    print("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
     return input("Enter choice: ").strip()
 
 
 def user_menu(username):
-    print("\n============================")
-    print("Welcome " + username)
-    print("============================")
-    print("1.  View My Profile")
-    print("2.  Edit Profile")
-    print("3.  Follow a User")
-    print("4.  Unfollow a User")
-    print("5.  View Following / Followers")
-    print("6.  Mutual Connections")
-    print("7.  Friend Recommendations")
-    print("8.  Search Users")
-    print("9.  Explore Popular Users")
-    print("0.  Logout")
-    print("============================")
+    print("\n-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
+    print("Hello " + username + "Welcome to the network")
+    print("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
+    print("- 1.  View Profile")
+    print("- 2.  Edit Profile")
+    print("- 3.  Follow a User")
+    print("- 4.  Unfollow a User")
+    print("- 5.  View Following / Followers")
+    print("- 6.  Connections")
+    print("- 7.  Friend Recommendations")
+    print("- 8.  Search Users")
+    print("- 9.  Explore Popular Users")
+    print("- 0.  Logout")
+    print("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
     return input("Enter choice: ").strip()
 
 
 # UC-1: Register
 def handle_register():
-    divider("Register User")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Register User_⎽-⎻⎺⎺⎻-⎽__")
     name     = input("Full name: ").strip()
     email    = input("Email: ").strip()
     username = input("Username: ").strip()
@@ -68,7 +70,7 @@ def handle_register():
 
 # UC-2: Login
 def handle_login():
-    divider("Login")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Login")
     username = input("Username: ").strip()
     password = input("Password: ").strip()
     user = login_user(username, password)
@@ -83,7 +85,7 @@ def handle_login():
 
 # View Profile
 def handle_view_profile(username):
-    divider("View Profiles")
+    divider("_⎽-⎻⎺⎺⎻-⎽__View Profiles")
     p = view_profile(username)
     if p:
         print("Username  : " + str(p["username"]))
@@ -99,7 +101,7 @@ def handle_view_profile(username):
 
 # UC-4: Edit Profile
 def handle_edit_profile(username):
-    divider("Edit Profile")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Edit Profile")
     p = view_profile(username)
     if not p:
         print("Profile not found.")
@@ -123,7 +125,7 @@ def handle_edit_profile(username):
 
 # UC-5: Follow a User
 def handle_follow(username):
-    divider("Follow a User")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Follow a User")
     target = input("Enter username to follow: ").strip()
     status = follow_user(username, target)
     if status == "ok":
@@ -137,7 +139,7 @@ def handle_follow(username):
 
 # UC-6: Unfollow a User
 def handle_unfollow(username):
-    divider("Unfollow a User")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Unfollow a User")
     target = input("Enter username to unfollow: ").strip()
     unfollow_user(username, target)
     print("You have unfollowed " + target + ".")
@@ -146,7 +148,7 @@ def handle_unfollow(username):
 
 # UC-7: View Following and Followers
 def handle_connections(username):
-    divider("Following and Followers")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Following and Followers")
 
     following = view_following(username)
     print("\nPeople you follow (" + str(len(following)) + "):")
@@ -166,10 +168,10 @@ def handle_connections(username):
 
 # UC-8: Mutual Connections
 def handle_mutual(username):
-    divider("Mutual Connections")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Connections")
     other = input("Enter username to compare with: ").strip()
     mutuals = mutual_connections(username, other)
-    print("\nMutual connections with " + other + " (" + str(len(mutuals)) + "):")
+    print("\nConnections with " + other + " (" + str(len(mutuals)) + "):")
     for u in mutuals:
         print("  " + u["username"] + " - " + u["name"])
     if not mutuals:
@@ -179,7 +181,7 @@ def handle_mutual(username):
 
 # UC-9: Friend Recommendations
 def handle_recommendations(username):
-    divider("Friend Recommendations")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Friend Recommendations")
     recs = friend_recommendations(username)
     print("\nSuggested users to follow:")
     for r in recs:
@@ -191,7 +193,7 @@ def handle_recommendations(username):
 
 # UC-10: Search Users
 def handle_search():
-    divider("Search Users")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Search Users")
     query = input("Search by name or username: ").strip()
     results = search_users(query)
     print("\nResults for '" + query + "' (" + str(len(results)) + "):")
@@ -204,7 +206,7 @@ def handle_search():
 
 # UC-11: Popular Users
 def handle_popular():
-    divider("Popular Users")
+    divider("_⎽-⎻⎺⎺⎻-⎽__Popular Users")
     users = popular_users()
     print("\nMost followed users:")
     for i, u in enumerate(users, 1):

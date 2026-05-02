@@ -1,6 +1,6 @@
 """
 services/user_service.py
-All Cypher queries for the 11 use cases.
+11 use cases.
 """
 import hashlib
 from db.neo4j_connection import run_query
@@ -10,7 +10,7 @@ def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
 
-# ── UC-1: User Registration ───────────────────────────────────────────────────
+### UC-1: User Registration
 def register_user(name: str, email: str, username: str, password: str) -> dict:
     """
     Cypher:
@@ -36,7 +36,7 @@ def register_user(name: str, email: str, username: str, password: str) -> dict:
     return result[0] if result else {}
 
 
-# ── UC-2: User Login ──────────────────────────────────────────────────────────
+### UC-2: User Login
 def login_user(username: str, password: str) -> dict | None:
     """
     Cypher:
@@ -51,7 +51,7 @@ def login_user(username: str, password: str) -> dict | None:
     return result[0] if result else None
 
 
-# ── UC-3: View Profile ────────────────────────────────────────────────────────
+### UC-3: View Profile
 def view_profile(username: str) -> dict | None:
     """
     Cypher:
@@ -75,7 +75,7 @@ def view_profile(username: str) -> dict | None:
     return result[0] if result else None
 
 
-# ── UC-4: Edit Profile ────────────────────────────────────────────────────────
+### UC-4: Edit Profile
 def edit_profile(username: str, new_name: str, new_bio: str) -> bool:
     """
     Cypher:
@@ -91,7 +91,7 @@ def edit_profile(username: str, new_name: str, new_bio: str) -> bool:
     return len(result) > 0
 
 
-# ── UC-5: Follow User ─────────────────────────────────────────────────────────
+### UC-5: Follow User
 def follow_user(follower_username: str, target_username: str) -> str:
     """
     Cypher:
@@ -109,7 +109,7 @@ def follow_user(follower_username: str, target_username: str) -> str:
     return "ok" if result else "user_not_found"
 
 
-# ── UC-6: Unfollow User ───────────────────────────────────────────────────────
+### UC-6: Unfollow User
 def unfollow_user(follower_username: str, target_username: str) -> bool:
     """
     Cypher:
@@ -124,7 +124,7 @@ def unfollow_user(follower_username: str, target_username: str) -> bool:
     return True
 
 
-# ── UC-7: View Connections (Following / Followers) ────────────────────────────
+### UC-7: View Connections (Following / Followers) 
 def view_following(username: str) -> list:
     """
     Cypher:
@@ -151,7 +151,7 @@ def view_followers(username: str) -> list:
     """, {"username": username})
 
 
-# ── UC-8: Mutual Connections ──────────────────────────────────────────────────
+### UC-8: Mutual Connections
 def mutual_connections(username: str, other_username: str) -> list:
     """
     Cypher:
@@ -167,7 +167,7 @@ def mutual_connections(username: str, other_username: str) -> list:
     """, {"username": username, "other": other_username})
 
 
-# ── UC-9: Friend Recommendations ──────────────────────────────────────────────
+### UC-9: Friend Recommendations 
 def friend_recommendations(username: str, limit: int = 5) -> list:
     """
     Cypher:
@@ -187,7 +187,7 @@ def friend_recommendations(username: str, limit: int = 5) -> list:
     """, {"username": username, "limit": limit})
 
 
-# ── UC-10: Search Users ───────────────────────────────────────────────────────
+### UC-10: Search Users
 def search_users(query: str) -> list:
     """
     Cypher:
@@ -207,7 +207,7 @@ def search_users(query: str) -> list:
     """, {"q": query})
 
 
-# ── UC-11: Explore Popular Users ──────────────────────────────────────────────
+### UC-11: Explore Popular Users 
 def popular_users(limit: int = 10) -> list:
     """
     Cypher:

@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>👥 Network Circles</h1>
+    <h1>Network Circles</h1>
     <p>Browse the ego networks and friend groups in the dataset</p>
 </div>
 
 <div class="circles-grid">
     {% for circle in circles %}
     <div class="circle-card">
-        <div class="circle-icon">⭕</div>
+        <div class="circle-icon"></div>
         <h3>Ego Node {{ circle.ego }}</h3>
         <p class="circle-stat">{{ circle.member_count }} members</p>
         <p class="circle-stat">{{ circle.edge_count }} connections</p>

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>👤 User {{ user_id }}</h1>
+    <h1>User {{ user_id }}</h1>
     <a href="/" class="btn-back">← Back to Search</a>
 </div>
 
@@ -30,7 +30,7 @@
     </div>
 
     <div class="profile-card full-width">
-        <h2>💡 Friend Recommendations</h2>
+        <h2>Friend Recommendations</h2>
         <div class="friends-list">
             {% for rec in recommendations %}
             <a href="/profile/{{ rec.id }}" class="friend-chip recommended">
