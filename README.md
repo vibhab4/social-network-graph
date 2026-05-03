@@ -11,7 +11,7 @@ pip install -r requirements.txt
 Edit `db/neo4j_connection.py` and fill in:
 ```python
 URI      = "neo4j+s://YOUR_AURA_URI.databases.neo4j.io"
-USERNAME = "neo4j"
+USERNAME = "YOUR_AURA_ID"
 PASSWORD = "YOUR_PASSWORD"
 ```
 
