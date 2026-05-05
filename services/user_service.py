@@ -9,3 +9,75 @@ from db.neo4j_connection import run_query
 def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
+# UC-1: User Registration
+def register_user(name: str, email: str, username: str, password: str) -> dict:
+    hash = hash_password(password)
+    result = run_query("""
+        MERGE (u:User {username: $username})
+        ON CREATE SET u.name = $name,
+                      u.email = $email,
+                      u.password = $password,
+                      u.bio = '',
+                      u.created = timestamp(),
+                      u.already_exists = false
+        ON MATCH SET  u.already_exists = true
+        RETURN u.username AS username, u.already_exists AS exists
+    """, {"username": username, "name": name, "email": email, "password": hash})
+    return result[0] if result else {}
+
+# UC-2: User Login
+def user_login(username: str, password: str) -> dict | None:
+    hash = hash_password(password)
+    result = run_query("""
+        MATCH (u:User {username: $username, password: $password})
+        RETURN u.username AS username, u.name AS name, u.email AS email, u.bio AS bio
+    """, {"username": username, "password": hash})
+    return result[0] if result else None
+
+# UC-3: View Profile
+def view_profile(username: str) -> dict | None:
+    result = run_query("""
+        MATCH (u:User {username: $username})
+        OPTIONAL MATCH (u)-[:FOLLOWS]->(following)
+        OPTIONAL MATCH (follower)-[:FOLLOWS]->(u)
+        RETURN u.username AS username,
+               u.name AS name,
+               u.email AS email,
+               u.bio AS bio,
+               count(DISTINCT following) AS following_count,
+               count(DISTINCT follower) AS follower_count
+    """, {"username": username})
+    return result[0] if result else None
+
+# UC-4: Edit Profile
+def edit_profile(username: str, new_name: str, new_bio: str) -> bool:
+    result = run_query("""
+        MATCH (u:User {username: $username})
+        SET u.name = $name,
+            u.bio = $bio
+        RETURN u.username AS username
+    """, {"username": username, "name": new_name, "bio": new_bio})
+    return len(result) > 0
+
+# UC-5: Follow User
+def follow_user(follower_username: str, target_username: str) -> str:
+    if follower_username == target_username:
+        return "cannot_self_follow"
+    result = run_query("""
+        MATCH (u1:User {username: $follower}), (u2:User {username: $target})
+        MERGE (u1)-[r:FOLLOWS]->(u2)
+        RETURN type(r) AS relation
+    """, {"follower": follower_username, "target": target_username}) 
+    return "ok" if result else "User not found"
+
+# UC-6: Unfollow User
+def unfollow_user(follower_username: str, target_username: str) -> bool:
+    result = run_query("""
+        MATCH (u1:User {username: $follower})-[r:FOLLOWS]->(u2:User {username: $target})
+        DELETE r
+        RETURN count(r) AS deleted
+    """, {"follower": follower_username, "target": target_username})
+    return True
+
+# UC-7: 
+

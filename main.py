@@ -4,7 +4,7 @@ CS157C Team Project
 """
 from db.neo4j_connection import close_driver
 from services.user_service import (
-    register_user, login_user, view_profile, edit_profile,
+    register_user, user_login, view_profile, edit_profile,
     follow_user, unfollow_user, view_following, view_followers,
     mutual_connections, friend_recommendations, search_users, popular_users
 )
@@ -73,7 +73,7 @@ def handle_login():
     divider("_⎽-⎻⎺⎺⎻-⎽__Login")
     username = input("Username: ").strip()
     password = input("Password: ").strip()
-    user = login_user(username, password)
+    user = user_login(username, password)
     if user:
         print("Login successful. Welcome back " + user["name"] + ".")
         return user["username"]
