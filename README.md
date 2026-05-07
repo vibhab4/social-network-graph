@@ -43,8 +43,8 @@ pip install -r requirements.txt
 
 Edit `db/neo4j_connection.py` and fill in:
 ```python
-URI      = "neo4j+s://YOUR_AURA_URI.databases.neo4j.io"
-USERNAME = "YOUR_AURA_ID"
+URI      = "neo4j+s://YOUR_INSTANCE_ID.databases.neo4j.io"
+USERNAME = "YOUR_USERNAME"
 PASSWORD = "YOUR_PASSWORD"
 ```
 
@@ -57,13 +57,20 @@ URI = "bolt://localhost:7687"
 
 1. Download `facebook_combined.txt.gz` from:
    https://snap.stanford.edu/data/ego-Facebook.html
-2. Unzip it into the project root folder
-3. Run:
+2. Unzip it to get `facebook_combined.txt`
+3. Run this conversion script to generate `facebook_edges.csv`
+   ```bash
+   python convert_edges.py
+   ```
+4. Download `SocialMediaUsersDataset.csv` from:
+   https://www.kaggle.com/datasets/arindamsahoo/social-media-users
+5. Place it directly in the project root folder
+6. Run:
 ```bash
 python load_dataset.py
 ```
 
-This loads **4,039 users** and **176,468 directed FOLLOWS relationships** from the ego-Facebook dataset. Each undirected friendship edge is stored as two directed relationships so following/follower counts work correctly. Only needs to be run once.
+`facebook_combined.txt.gz` loads **4,039 users** and **176,468 directed FOLLOWS relationships** from the ego-Facebook dataset. Each undirected friendship edge is stored as two directed relationships so following/follower counts work correctly. Only needs to be run once.
 
 ### 4. Run the app
 
@@ -95,7 +102,12 @@ python main.py
 social-network/
 ├── main.py               #Console app entry point (all 11 UCs)
 ├── load_dataset.py       #One-time dataset loader
+├── SocialMediaUsersDataset.csv
+├── facebook_edges.csv
+├── .env
+├── .env.example
 ├── requirements.txt
+├── .gitignore
 ├── README.md
 ├── db/
 │   ├── __init__.py
