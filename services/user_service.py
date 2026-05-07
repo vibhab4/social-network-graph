@@ -132,7 +132,7 @@ def search_users(query):
 
 
 # UC-11: Popular Users
-def popular_users():
+def popular_users(limit=10):
     return run_query("""
         MATCH (u:User)
         OPTIONAL MATCH (follower:User)-[:FOLLOWS]->(u)
@@ -140,4 +140,5 @@ def popular_users():
                u.name AS name,
                count(follower) AS follower_count
         ORDER BY follower_count DESC
-    """)
+        LIMIT $limit
+    """, {"limit": limit})
