@@ -1,9 +1,13 @@
 from neo4j import GraphDatabase
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 ### NEO4J CREDENTIALS 
-URI      = "neo4j+s://bc26e35f.databases.neo4j.io"
-USERNAME = "bc26e35f"
-PASSWORD = " "
+URI      = os.getenv("NEO4J_URI")
+USERNAME = os.getenv("NEO4J_USERNAME")
+PASSWORD = os.getenv("NEO4J_PASSWORD")
 ####
 
 _driver = None
