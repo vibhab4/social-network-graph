@@ -31,7 +31,7 @@ def main_menu():
 
 def user_menu(username):
     print("\n-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
-    print("Hello " + username + "Welcome to the network")
+    print("Hello " + username + "! Welcome to the Connected social network :)")
     print("-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻-")
     print("- 1.  View Profile")
     print("- 2.  Edit Profile")

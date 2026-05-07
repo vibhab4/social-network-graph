@@ -28,7 +28,6 @@ EDGES_CSV      = "/Users/aravpanchmatia/social_network_graph/facebook_edges.csv"
 # How many users to load (facebook_ed has ~4039 unique nodes)
 MAX_USERS = 4039
 
-
 # HELPERS
 fake = Faker()
 random.seed(42)
