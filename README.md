@@ -8,18 +8,28 @@ A console-based social networking app backed by Neo4j. Users can register, follo
 ## Project Structure
 
 ```
-social-network/
-├── main.py                   # Console app entry point (all 11 use cases)
-├── load_dataset.py           # One-time dataset loader (SNAP Facebook)
+social-network-graph/
+├── main.py                       # Console app entry point (all 11 use cases)
+├── load_dataset.py               # One-time dataset loader
+├── convert_edges.py              # Converts facebook_combined.txt to CSV format
+├── facebook_combined.txt         # Raw SNAP edge list (undirected)
+├── facebook_edges.csv            # Converted edge list (columns: user1, user2)
+├── SocialMediaUsersDataset.csv   # Kaggle dataset (user attributes)
 ├── requirements.txt
 ├── README.md
-├── .env                      # Your credentials (never committed)
+├── .env.example                  # Credential template — copy to .env and fill in
 ├── db/
 │   ├── __init__.py
-│   └── neo4j_connection.py   # Neo4j driver (reads from .env)
-└── services/
-    ├── __init__.py
-    └── user_service.py       # All Cypher queries for every use case
+│   └── neo4j_connection.py       # Neo4j driver (reads credentials from .env)
+├── services/
+│   ├── __init__.py
+│   └── user_service.py           # All Cypher queries for every use case
+└── templates/
+    ├── base.html
+    ├── circles.html
+    ├── feed.html
+    ├── profile.html
+    └── search.html
 ```
 
 ---
@@ -58,8 +68,14 @@ URI = "bolt://localhost:7687"
 1. Download `facebook_combined.txt.gz` from:
    https://snap.stanford.edu/data/ego-Facebook.html
 2. Unzip it to get `facebook_combined.txt`.
-3. Place it directly in the project root folder.
-4. Run:
+3. Run this conversion script to generate `facebook_edges.csv`
+   ```bash
+   python convert_edges.py
+   ```
+4. Download `SocialMediaUsersDataset.csv` from:
+   https://www.kaggle.com/datasets/arindamsahoo/social-media-users
+5. Place it directly in the project root folder
+6. Run:
 ```bash
 python load_dataset.py
 ```
