@@ -79,5 +79,65 @@ def unfollow_user(follower_username: str, target_username: str) -> bool:
     """, {"follower": follower_username, "target": target_username})
     return True
 
-# UC-7: 
+# UC-7: View Following
+def view_following(username):
+    return run_query("""
+        MATCH (u:User {username: $username})-[:FOLLOWS]->(f:User)
+        RETURN f.username AS username, f.name AS name
+        ORDER BY f.name
+    """, {"username": username})
 
+# UC-7: View Followers
+def view_followers(username):
+    return run_query("""
+        MATCH (f:User)-[:FOLLOWS]->(u:User {username: $username})
+        RETURN f.username AS username, f.name AS name
+        ORDER BY f.name
+    """, {"username": username})
+
+# UC-8: Mutual Connections
+def mutual_connections(username, other_username):
+    return run_query("""
+        MATCH (u:User {username: $username})-[:FOLLOWS]->(mutual:User)
+              <-[:FOLLOWS]-(other:User {username: $other})
+        RETURN mutual.username AS username, mutual.name AS name
+        ORDER BY mutual.name
+    """, {"username": username, "other": other_username})
+
+# UC-9: Friend Recommendations
+def friend_recommendations(username, limit=10):
+    return run_query("""
+        MATCH (u:User {username: $username})-[:FOLLOWS]->(middle:User)
+                                            -[:FOLLOWS]->(rec:User)
+        WHERE rec.username <> $username
+          AND NOT (u)-[:FOLLOWS]->(rec)
+        RETURN rec.username AS username,
+               rec.name AS name,
+               count(middle) AS common_connections
+        ORDER BY common_connections DESC
+        LIMIT $limit
+    """, {"username": username, "limit": limit})
+
+
+# UC-10: Search Users
+def search_users(query):
+    return run_query("""
+        MATCH (u:User)
+        WHERE toLower(u.username) CONTAINS $pattern
+           OR toLower(u.name) CONTAINS $pattern
+        RETURN u.username AS username, u.name AS name
+        ORDER BY u.username
+        LIMIT 25
+    """, {"pattern": query.lower()})
+
+
+# UC-11: Popular Users
+def popular_users():
+    return run_query("""
+        MATCH (u:User)
+        OPTIONAL MATCH (follower:User)-[:FOLLOWS]->(u)
+        RETURN u.username AS username,
+               u.name AS name,
+               count(follower) AS follower_count
+        ORDER BY follower_count DESC
+    """)
