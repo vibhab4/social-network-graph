@@ -1,7 +1,7 @@
 # (: Connected :) — Social Network
 ### CS157C Team Project | Neo4j + Python
 
-A console-based social networking app backed by Neo4j. Users can register, follow each other, get friend recommendations, and explore the network — all powered by graph traversal queries on the Stanford SNAP Facebook dataset.
+A console-based social networking app backed by Neo4j. Users can register, follow each other, get friend recommendations, and explore the network — all powered by graph traversal queries on the Stanford SNAP Facebook dataset and Social Media Users Dataset from Kaggle.
 
 ---
 
@@ -68,14 +68,8 @@ URI = "bolt://localhost:7687"
 1. Download `facebook_combined.txt.gz` from:
    https://snap.stanford.edu/data/ego-Facebook.html
 2. Unzip it to get `facebook_combined.txt`.
-3. Run this conversion script to generate `facebook_edges.csv`
-   ```bash
-   python convert_edges.py
-   ```
-4. Download `SocialMediaUsersDataset.csv` from:
-   https://www.kaggle.com/datasets/arindamsahoo/social-media-users
-5. Place it directly in the project root folder
-6. Run:
+3. Place it directly in the project root folder
+4. Run:
 ```bash
 python load_dataset.py
 ```
